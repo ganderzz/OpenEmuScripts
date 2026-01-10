@@ -1,0 +1,10 @@
+[project]
+name = "rorganizer"
+version = "0.1.0"
+description = "Organizes files and pulls in cover art"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "cyclopts>=4.4.4",
+    "requests>=2.32.5",
+]
