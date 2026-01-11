@@ -37,12 +37,12 @@ def organize(directory: str):
     for file in zip_files:
         normalized_name = (
             file.name.replace("\\((.+)\\)", "")
-            .replace("_", ":")
+            .replace("_", "")
             .split(".zip")[0]
             .strip()
         )
 
-        new_dir = directory / normalized_name
+        new_dir = dir / normalized_name
         orig_file_path = "/".join(file.parts)
 
         try:
@@ -103,7 +103,7 @@ def download_cover_photos(directory: str):
                 )
                 image_req.raise_for_status()
 
-                cover_path = directory / f"cover.{extension}"
+                cover_path = Path(directory) / f"cover.{extension}"
                 with open(cover_path, "wb") as f:
                     f.write(image_req.content)
                 print(f"Cover photo added in {cover_path}.")
@@ -114,6 +114,8 @@ def download_cover_photos(directory: str):
 
 @app.command
 def insert_cover_photos(directory: str):
+    scrape_path = Path(directory)
+
     home = Path.home()
     openemu_path = home / "Library" / "Application Support" / "OpenEmu" / "Game Library"
     db_path = openemu_path / "Library.storedata"
